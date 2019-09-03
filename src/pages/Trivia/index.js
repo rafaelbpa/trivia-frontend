@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import shuffle from 'shuffle-array';
 
 import { Container, QuestionWrapper, Info, QuestionText } from './styles';
 
@@ -36,10 +37,7 @@ export default function Trivia({ match }) {
         ...response.data.results[0].incorrect_answers,
       ];
 
-      console.tron.error(response.data.results);
-      console.tron.error(data);
-
-      setQuestions(data);
+      setQuestions(shuffle(data));
       setCorrectAnswer(response.data.results[0].correct_answer);
       setQuestionTitle(response.data.results[0].question);
       setCategory(response.data.results[0].category);
