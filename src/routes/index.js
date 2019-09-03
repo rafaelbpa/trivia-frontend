@@ -9,7 +9,7 @@ export default function Routes() {
   return (
     <Switch>
       <Route path="/" exact component={Categories} />
-      <Route path="/trivia" component={Trivia} />
+      <Route path="/trivia/:id" component={Trivia} />
       <Route path="/report" component={Report} />
     </Switch>
   );

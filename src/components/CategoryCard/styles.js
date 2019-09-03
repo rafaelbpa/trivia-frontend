@@ -5,8 +5,8 @@ export const Container = styled.li`
   border: 1px solid #e4e4e6;
   box-shadow: 0px 1px 4px rgba(52, 60, 88, 0.4);
   border-radius: 8px;
-  max-width: 239px;
-  width: 100%;
+  width: 240px;
+  /* width: 100%; */
 
   h6 {
     font-size: 18px;

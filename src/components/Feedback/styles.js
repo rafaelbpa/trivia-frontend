@@ -3,16 +3,35 @@ import styled from 'styled-components';
 import tick from '~/assets/tick.png';
 import cross from '~/assets/cross.png';
 
+export const Wrapper = styled.div`
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  margin: auto;
+  background-color: rgba(30, 33, 36, 0.5);
+  display: flex;
+  align-content: center;
+  justify-content: center;
+`;
+
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  max-width: 328px;
+  background: #fff;
+  width: 328px;
+  height: 228px;
   border: 3px solid;
   border-color: ${props => (props.isCorrect ? '#32CB82' : '#FF4F4F')};
   box-shadow: 0px 3px 6px rgba(52, 60, 88, 0.4);
   border-radius: 8px;
   align-items: center;
   justify-content: center;
+  align-self: center;
+  justify-self: center;
 `;
 
 export const Icon = styled.img.attrs(props => ({
