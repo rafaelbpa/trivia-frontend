@@ -8,7 +8,7 @@ import closeIcon from '~/assets/x-circle.png';
 export default function CategoryHeader({ category }) {
   return (
     <Container>
-      <h4>{category}</h4>
+      <span>{category}</span>
       <button type="button">
         <img src={closeIcon} alt="Fechar" />
         <span>Fechar</span>

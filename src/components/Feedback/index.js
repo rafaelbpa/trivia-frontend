@@ -5,13 +5,13 @@ import { Wrapper, Container, Icon, Result, Button } from './styles';
 
 import arrowRight from '~/assets/arrow-right.png';
 
-export default function Feedback({ isCorrect }) {
+export default function Feedback({ isCorrect, goForward }) {
   return (
     <Wrapper>
       <Container isCorrect={isCorrect}>
         <Icon isCorrect={isCorrect} />
         <Result>Você {isCorrect ? 'acertou' : 'errou'}!</Result>
-        <Button>
+        <Button type="button" onClick={goForward}>
           <span>Avançar</span>
           <img src={arrowRight} alt="Próxima questão" />
         </Button>
@@ -22,4 +22,5 @@ export default function Feedback({ isCorrect }) {
 
 Feedback.propTypes = {
   isCorrect: PropTypes.bool.isRequired,
+  goForward: PropTypes.func.isRequired,
 };

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import shuffle from 'shuffle-array';
 
@@ -10,9 +11,24 @@ import Question from '~/components/Question';
 import Feedback from '~/components/Feedback';
 
 import api from '~/services/api';
+import history from '~/services/history';
+
+import {
+  nextQuestionRequest,
+  createTriviaDataRequest,
+} from '~/store/modules/trivia/actions';
 
 export default function Trivia({ match }) {
   const { id } = match.params;
+  const dispatch = useDispatch();
+
+  const trivia = useSelector(state => state.trivia);
+  if (!trivia[id]) {
+    dispatch(createTriviaDataRequest(id));
+  } else if (trivia[id] && trivia[id].questionNumber > 10) {
+    history.push('/results');
+  }
+
   const [questions, setQuestions] = useState([]);
   const [questionTitle, setQuestionTitle] = useState('');
   const [category, setCategory] = useState('');
@@ -23,11 +39,12 @@ export default function Trivia({ match }) {
 
   useEffect(() => {
     async function loadQuestions() {
+      if (!trivia[id]) return;
       const response = await api.get(`api.php`, {
         params: {
           amount: 1,
           category: id,
-          difficulty: 'medium',
+          difficulty: trivia[id].difficulty.en,
           type: 'multiple',
         },
       });
@@ -44,7 +61,7 @@ export default function Trivia({ match }) {
     }
 
     loadQuestions();
-  }, [id]);
+  }, [id, trivia]);
 
   useEffect(() => {
     if (selectedAnswer) {
@@ -69,42 +86,57 @@ export default function Trivia({ match }) {
      */
   }
 
+  function nextQuestion() {
+    dispatch(
+      nextQuestionRequest(trivia[id].questionNumber, id, trivia[id].guesses)
+    );
+    setIsModalVisible(false);
+  }
+
   return (
     <Container>
       {isModalVisible && (
-        <Feedback isCorrect={correctAnswer === selectedAnswer} />
+        <Feedback
+          goForward={nextQuestion}
+          isCorrect={correctAnswer === selectedAnswer}
+        />
       )}
       <Header />
-      <CategoryHeader category={category} />
-      <QuestionWrapper>
-        <Info>
-          <h6>Questão 1</h6>
-          <span>Dificuldade 2</span>
-        </Info>
-        <QuestionText>{questionTitle}</QuestionText>
+      {trivia && trivia[id] && (
+        <>
+          <CategoryHeader category={category} />
+          <QuestionWrapper>
+            <Info>
+              <h6>Questão {trivia[id].questionNumber}</h6>
+              <span>Dificuldade {trivia[id].difficulty.pt}</span>
+            </Info>
+            <QuestionText>{questionTitle}</QuestionText>
 
-        {questions.map(question => (
-          <button
-            onClick={() => selectQuestion(question)}
-            className="questionButton"
-            type="button"
-          >
-            <Question
-              key={question}
-              question={question}
-              isSelected={selectedAnswer === question}
-            />
-          </button>
-        ))}
-        <button
-          className="answerButton"
-          onClick={handleAnswer}
-          disabled={isNoAnAnswerSelected}
-          type="button"
-        >
-          Responder
-        </button>
-      </QuestionWrapper>
+            {questions.map(question => (
+              <button
+                onClick={() => selectQuestion(question)}
+                className="questionButton"
+                type="button"
+                key={question}
+              >
+                <Question
+                  key={question}
+                  question={question}
+                  isSelected={selectedAnswer === question}
+                />
+              </button>
+            ))}
+            <button
+              className="answerButton"
+              onClick={handleAnswer}
+              disabled={isNoAnAnswerSelected}
+              type="button"
+            >
+              Responder
+            </button>
+          </QuestionWrapper>
+        </>
+      )}
     </Container>
   );
 }

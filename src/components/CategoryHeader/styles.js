@@ -10,7 +10,7 @@ export const Container = styled.div`
   margin: 0 auto;
   padding: 0 16px;
 
-  h4 {
+  span {
     font-size: 24px;
     line-height: 32px;
     color: #1e2124;
