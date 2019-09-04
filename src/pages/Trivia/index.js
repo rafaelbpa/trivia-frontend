@@ -88,7 +88,12 @@ export default function Trivia({ match }) {
 
   function nextQuestion() {
     dispatch(
-      nextQuestionRequest(trivia[id].questionNumber, id, trivia[id].guesses)
+      nextQuestionRequest(
+        trivia[id].questionNumber,
+        id,
+        trivia[id].guesses,
+        trivia[id].difficulty
+      )
     );
     setIsModalVisible(false);
   }
