@@ -45,6 +45,7 @@ export default function Trivia({ match }) {
   const [correctAnswer, setCorrectAnswer] = useState('');
   const [isNoAnAnswerSelected, setIsNoAnAnswerSelected] = useState(true);
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [difficulty, setDifficulty] = useState({});
 
   useEffect(() => {
     async function loadQuestions() {
@@ -83,6 +84,56 @@ export default function Trivia({ match }) {
   }
 
   function handleAnswer() {
+    if (correctAnswer === selectedAnswer) {
+      trivia[id].score[trivia[id].difficulty.en] += 1;
+
+      trivia[id].guessStreak.correct += 1;
+      trivia[id].guessStreak.wrong = 0;
+    } else {
+      trivia[id].guessStreak.correct = 0;
+      trivia[id].guessStreak.wrong += 1;
+    }
+
+    /**
+     * User has a correct streak >= 2: increase difficulty (if possible)
+     */
+    if (
+      trivia[id].difficulty.en !== 'hard' &&
+      trivia[id].guessStreak.correct === 2
+    ) {
+      if (trivia[id].difficulty.en === 'easy') {
+        setDifficulty({
+          en: 'medium',
+          pt: 'Médio',
+        });
+      } else if (trivia[id].difficulty.en === 'medium') {
+        setDifficulty({
+          en: 'hard',
+          pt: 'Difícil',
+        });
+      }
+    }
+
+    /**
+     * User has a wrong streak >= 2: decrease difficulty (if possible)
+     */
+    if (
+      trivia[id].difficulty.en !== 'easy' &&
+      trivia[id].guessStreak.wrong === 2
+    ) {
+      if (trivia[id].difficulty.en === 'hard') {
+        setDifficulty({
+          en: 'medium',
+          pt: 'Médio',
+        });
+      } else if (trivia[id].difficulty.en === 'medium') {
+        setDifficulty({
+          en: 'easy',
+          pt: 'Fácil',
+        });
+      }
+    }
+
     setIsModalVisible(true);
     // TODO: salva os dados aqui p/ o banco
     /**
@@ -100,8 +151,9 @@ export default function Trivia({ match }) {
       nextQuestionRequest(
         trivia[id].questionNumber,
         id,
-        trivia[id].guesses,
-        trivia[id].difficulty
+        trivia[id].score,
+        difficulty,
+        trivia[id].guessStreak
       )
     );
     setIsModalVisible(false);

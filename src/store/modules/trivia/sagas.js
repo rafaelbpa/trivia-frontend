@@ -9,7 +9,6 @@ export function nextQuestionSuccess({ payload }) {
 
 export function* nextQuestionRequest({ payload }) {
   const { questionNumber, category } = payload;
-  console.tron.warn(`OEAKo qn = ${questionNumber}`);
   if (questionNumber > 10) {
     history.push(`/results/${category}`);
   } else {

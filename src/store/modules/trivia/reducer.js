@@ -13,10 +13,14 @@ export default function trivia(state = INITIAL_STATE, action) {
             pt: 'Médio',
             en: 'medium',
           },
-          guesses: {
+          score: {
             easy: 0,
             medium: 0,
             hard: 0,
+          },
+          guessStreak: {
+            correct: 0,
+            wrong: 0,
           },
         };
         break;
@@ -24,13 +28,13 @@ export default function trivia(state = INITIAL_STATE, action) {
         draft[action.payload.category].questionNumber += 1;
         draft[action.payload.category].category = action.payload.category;
         draft[action.payload.category].difficulty = action.payload.difficulty;
-        draft[action.payload.category].guesses = action.payload.guesses;
+        draft[action.payload.category].score = action.payload.score;
         break;
       case '@trivia/NEXT_QUESTION_SUCCESS':
         draft[action.payload.category].questionNumber += 1;
         draft[action.payload.category].category = action.payload.category;
         draft[action.payload.category].difficulty = action.payload.difficulty;
-        draft[action.payload.category].guesses = action.payload.guesses;
+        draft[action.payload.category].score = action.payload.score;
         break;
       default:
     }

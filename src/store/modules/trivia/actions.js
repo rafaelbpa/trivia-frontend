@@ -8,23 +8,24 @@ export function createTriviaDataRequest(categoryId) {
 export function nextQuestionRequest(
   questionNumber,
   category,
-  guesses,
-  difficulty
+  score,
+  difficulty,
+  guessStreak
 ) {
   return {
     type: '@trivia/NEXT_QUESTION_REQUEST',
-    payload: { questionNumber, category, guesses, difficulty },
+    payload: { questionNumber, category, score, difficulty, guessStreak },
   };
 }
 
 export function nextQuestionSuccess(
   questionNumber,
   category,
-  guesses,
+  score,
   difficulty
 ) {
   return {
     type: '@trivia/NEXT_QUESTION_SUCCESS',
-    payload: { questionNumber, category, guesses, difficulty },
+    payload: { questionNumber, category, score, difficulty },
   };
 }
