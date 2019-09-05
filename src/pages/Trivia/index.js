@@ -35,7 +35,7 @@ export default function Trivia({ match }) {
   if (!trivia[id]) {
     dispatch(createTriviaDataRequest(id));
   } else if (trivia[id] && trivia[id].questionNumber > 10) {
-    history.push('/results');
+    history.push(`/result/${id}`);
   }
 
   const [questions, setQuestions] = useState([]);

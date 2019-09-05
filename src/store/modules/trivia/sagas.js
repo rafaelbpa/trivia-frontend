@@ -10,7 +10,7 @@ export function nextQuestionSuccess({ payload }) {
 export function* nextQuestionRequest({ payload }) {
   const { questionNumber, category } = payload;
   if (questionNumber > 10) {
-    history.push(`/results/${category}`);
+    history.push(`/result/${category}`);
   } else {
     yield put(nextQuestionSuccess(payload));
   }

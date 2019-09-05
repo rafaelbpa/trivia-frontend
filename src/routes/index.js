@@ -3,7 +3,7 @@ import { Switch } from 'react-router-dom';
 import Route from './Route';
 
 import Categories from '~/pages/Categories';
-import Report from '~/pages/Report';
+import Result from '~/pages/Result';
 import Trivia from '~/pages/Trivia';
 
 export default function Routes() {
@@ -11,7 +11,7 @@ export default function Routes() {
     <Switch>
       <Route path="/" exact component={Categories} />
       <Route path="/trivia/:id" component={Trivia} />
-      <Route path="/report" component={Report} />
+      <Route path="/result/:id" component={Result} />
     </Switch>
   );
 }
