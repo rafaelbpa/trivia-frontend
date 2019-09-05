@@ -52,11 +52,6 @@ export const Info = styled.div`
     line-height: 24px;
     color: #000;
   }
-
-  span {
-    background: #343c58;
-    border-radius: 14px;
-  }
 `;
 
 export const QuestionText = styled.p`
@@ -65,4 +60,31 @@ export const QuestionText = styled.p`
   letter-spacing: 0.2px;
   color: #1e2124;
   margin-bottom: 3vh;
+`;
+
+export const Difficulty = styled.div`
+  display: flex;
+  flex-direction: row;
+  background: #d0d2d9;
+  /* opacity: 0.2; */
+  border-radius: 14px;
+  align-items: center;
+  justify-content: center;
+  height: 20px;
+
+  span {
+    color: #2e354e;
+    font-size: 12px;
+    line-height: 16px;
+    margin: 2px 6px;
+  }
+`;
+
+export const Stars = styled.div`
+  margin-left: 6px;
+
+  img {
+    width: 10px;
+    height: 10px;
+  }
 `;

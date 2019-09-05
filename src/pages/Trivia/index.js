@@ -3,7 +3,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import shuffle from 'shuffle-array';
 
-import { Container, QuestionWrapper, Info, QuestionText } from './styles';
+import {
+  Container,
+  QuestionWrapper,
+  Info,
+  QuestionText,
+  Difficulty,
+  Stars,
+} from './styles';
 
 import Header from '~/components/Header';
 import CategoryHeader from '~/components/CategoryHeader';
@@ -12,6 +19,8 @@ import Feedback from '~/components/Feedback';
 
 import api from '~/services/api';
 import history from '~/services/history';
+
+import star from '~/assets/star.png';
 
 import {
   nextQuestionRequest,
@@ -98,6 +107,27 @@ export default function Trivia({ match }) {
     setIsModalVisible(false);
   }
 
+  function createStarsRender() {
+    if (trivia[id].difficulty.en === 'easy') {
+      return <img src={star} alt={trivia[id].difficulty.pt} />;
+    }
+    if (trivia[id].difficulty.en === 'medium') {
+      return (
+        <>
+          <img src={star} alt={trivia[id].difficulty.pt} />
+          <img src={star} alt={trivia[id].difficulty.pt} />
+        </>
+      );
+    }
+    return (
+      <>
+        <img src={star} alt={trivia[id].difficulty.pt} />
+        <img src={star} alt={trivia[id].difficulty.pt} />
+        <img src={star} alt={trivia[id].difficulty.pt} />
+      </>
+    );
+  }
+
   return (
     <Container>
       {isModalVisible && (
@@ -113,7 +143,10 @@ export default function Trivia({ match }) {
           <QuestionWrapper>
             <Info>
               <h6>Questão {trivia[id].questionNumber}</h6>
-              <span>Dificuldade {trivia[id].difficulty.pt}</span>
+              <Difficulty>
+                <Stars>{createStarsRender()}</Stars>
+                <span>{trivia[id].difficulty.pt}</span>
+              </Difficulty>
             </Info>
             <QuestionText>{questionTitle}</QuestionText>
 
