@@ -9,6 +9,9 @@ export const Content = styled.div`
   max-width: 534px;
   margin: 0 auto;
   padding: 63px 0 72px 0;
+  @media (max-width: 375px) {
+    padding: 0;
+  }
 `;
 
 export const PerformanceBar = styled.div`
@@ -26,6 +29,10 @@ export const PerformanceBar = styled.div`
   position: absolute;
   left: 50%;
   transform: translateY(-50%) translateX(-50%);
+
+  @media (max-width: 375px) {
+    width: 252px;
+  }
 `;
 
 export const BlueWrapper = styled.div`
@@ -73,17 +80,28 @@ export const WhiteWrapper = styled.div`
   align-items: center;
   justify-content: space-around;
 
-  button {
-    background: #0467db;
-    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.15);
-    border-radius: 8px;
-    padding: 11px 24px;
-    margin: 15px;
+  a {
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-    color: #fff;
-    font-size: 16px;
-    line-height: 24px;
-    text-align: center;
+    button {
+      background: #0467db;
+      box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.15);
+      border-radius: 8px;
+      padding: 11px 24px;
+
+      color: #fff;
+      font-size: 16px;
+      line-height: 24px;
+      text-align: center;
+
+      @media (max-width: 375px) {
+        width: 100%;
+      }
+    }
   }
 `;
 
@@ -98,6 +116,10 @@ export const QuestionsSummary = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
+
+  @media (max-width: 375px) {
+    left: calc(50% - 199px / 2 + 1px);
+  }
 `;
 
 export const CorrectSummary = styled.div`
@@ -143,9 +165,12 @@ export const QuestionsDetails = styled.div`
   flex-direction: row;
   width: 100%;
   margin: 15px;
-
   align-items: center;
   justify-content: space-around;
+
+  @media (max-width: 375px) {
+    flex-direction: column;
+  }
 `;
 
 export const QuestionDetail = styled.div`
@@ -154,8 +179,18 @@ export const QuestionDetail = styled.div`
   width: 100%;
   align-items: center;
 
+  @media (max-width: 375px) {
+    &:not(:last-child) {
+      margin-bottom: 46px;
+    }
+  }
+
   &:not(:first-child) {
     border-left: 1px solid #b8bed5;
+
+    @media (max-width: 375px) {
+      border-left: 0;
+    }
   }
 
   span {
