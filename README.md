@@ -20,3 +20,12 @@ yarn start
 ```
 
 Access on http://localhost:3000/
+
+## Tests
+
+Run the command
+```
+yarn test
+```
+
+and select one option (press 'a' to run all tests)
