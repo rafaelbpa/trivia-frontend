@@ -17,7 +17,7 @@ import CategoryHeader from '~/components/CategoryHeader';
 import Question from '~/components/Question';
 import Feedback from '~/components/Feedback';
 
-import api from '~/services/api';
+import { triviaApi, api } from '~/services/api';
 import history from '~/services/history';
 
 import star from '~/assets/star.png';
@@ -50,7 +50,7 @@ export default function Trivia({ match }) {
   useEffect(() => {
     async function loadQuestions() {
       if (!trivia[id]) return;
-      const response = await api.get(`api.php`, {
+      const response = await triviaApi.get(`api.php`, {
         params: {
           amount: 1,
           category: id,
@@ -83,7 +83,7 @@ export default function Trivia({ match }) {
     setSelectedAnswer(question);
   }
 
-  function handleAnswer() {
+  async function handleAnswer() {
     if (correctAnswer === selectedAnswer) {
       trivia[id].score.correct[trivia[id].difficulty.en] += 1;
 
@@ -141,15 +141,14 @@ export default function Trivia({ match }) {
     }
 
     setIsModalVisible(true);
-    // TODO: salva os dados aqui p/ o banco
-    /**
-    const data = {
+
+    await api.post('trivia', {
+      question_number: trivia[id].questionNumber,
+      difficulty: trivia[id].difficulty.en,
       user_answer: selectedAnswer,
       correct_answer: correctAnswer,
-      guess_right: selectedAnswer === correctAnswer,
-
-    }
-     */
+      is_correct: correctAnswer === selectedAnswer,
+    });
   }
 
   function nextQuestion() {

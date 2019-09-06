@@ -6,14 +6,14 @@ import { Container, Content, Title, CategoryList } from './styles';
 import Header from '~/components/Header';
 import CategoryCard from '~/components/CategoryCard';
 
-import api from '~/services/api';
+import { triviaApi } from '~/services/api';
 
 export default function Categories() {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
     async function loadCategories() {
-      const response = await api.get('api_category.php');
+      const response = await triviaApi.get('api_category.php');
 
       setCategories(response.data.trivia_categories);
     }
