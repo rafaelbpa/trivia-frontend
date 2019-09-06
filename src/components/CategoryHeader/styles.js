@@ -7,12 +7,12 @@ export const Container = styled.div`
   justify-content: space-between;
   max-width: 700px;
   margin: 0 auto;
-  padding: 0 16px;
 
   span {
     font-size: 24px;
     line-height: 32px;
     color: #1e2124;
+    margin: 10px 0;
   }
 
   button {

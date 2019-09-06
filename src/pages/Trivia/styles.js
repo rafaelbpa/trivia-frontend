@@ -32,6 +32,12 @@ export const QuestionWrapper = styled.div`
     color: #fff;
     text-align: center;
     align-self: stretch;
+    width: 149px;
+    margin: 0 auto;
+
+    @media (max-width: 768px) {
+      width: 100%;
+    }
 
     &:disabled {
       background: #c9cccf;
@@ -65,8 +71,7 @@ export const QuestionText = styled.p`
 export const Difficulty = styled.div`
   display: flex;
   flex-direction: row;
-  background: #d0d2d9;
-  /* opacity: 0.2; */
+  background: rgba(52, 60, 88, 0.2);
   border-radius: 14px;
   align-items: center;
   justify-content: center;

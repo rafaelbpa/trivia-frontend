@@ -17,24 +17,20 @@ export const Title = styled.span`
   font-size: 44px;
   line-height: 56px;
   color: #1e2124;
-  margin-top: 48px;
-  margin-bottom: 32px;
+  margin: 48px 12px 32px 12px;
+  align-self: flex-start;
 `;
 
 export const CategoryList = styled.ul`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  align-items: flex-start;
+  align-items: center;
+  justify-content: center;
 
   li {
-    margin-right: 24px;
-    margin-bottom: 25px;
+    margin: 12px;
     flex-grow: 1;
     flex-shrink: 1;
-
-    :last-child {
-      /* margin-right: 0; */
-    }
   }
 `;
