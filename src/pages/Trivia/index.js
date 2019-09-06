@@ -85,11 +85,13 @@ export default function Trivia({ match }) {
 
   function handleAnswer() {
     if (correctAnswer === selectedAnswer) {
-      trivia[id].score[trivia[id].difficulty.en] += 1;
+      trivia[id].score.correct[trivia[id].difficulty.en] += 1;
 
       trivia[id].guessStreak.correct += 1;
       trivia[id].guessStreak.wrong = 0;
     } else {
+      trivia[id].score.wrong[trivia[id].difficulty.en] += 1;
+
       trivia[id].guessStreak.correct = 0;
       trivia[id].guessStreak.wrong += 1;
     }
@@ -112,6 +114,8 @@ export default function Trivia({ match }) {
           pt: 'Difícil',
         });
       }
+    } else {
+      setDifficulty(trivia[id].difficulty);
     }
 
     /**
@@ -132,6 +136,8 @@ export default function Trivia({ match }) {
           pt: 'Fácil',
         });
       }
+    } else {
+      setDifficulty(trivia[id].difficulty);
     }
 
     setIsModalVisible(true);

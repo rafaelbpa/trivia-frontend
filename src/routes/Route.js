@@ -5,11 +5,11 @@ import { Route, Redirect } from 'react-router-dom';
 import { store } from '~/store';
 
 export default function RouteWrapper({ component: Component, ...rest }) {
-  const { questionNumber } = store.getState().trivia;
+  const { questionNumber, category } = store.getState().trivia;
   const isTriviaCompleted = questionNumber > 10;
 
   if (isTriviaCompleted) {
-    return <Redirect to="/results" />;
+    return <Redirect to={`/result/${category}`} />;
   }
 
   return <Route {...rest} component={Component} />;

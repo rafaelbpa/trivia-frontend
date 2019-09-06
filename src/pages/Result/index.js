@@ -25,41 +25,41 @@ import mascot from '~/assets/mascot.png';
 
 export default function Result({ match }) {
   const { id } = match.params;
-  const myId = id - 1;
   const [correctScore, setCorrectScore] = useState(0);
   const [wrongScore, setWrongScore] = useState(0);
   const [scores, setScores] = useState({});
 
-  const TOTAL_QUESTIONS = 10;
-
   const trivia = useSelector(state => state.trivia);
 
   useEffect(() => {
-    if (!trivia && !myId) return;
-    console.tron.warn(trivia[myId]);
+    if (!trivia && !id) return;
 
     setCorrectScore(
-      trivia[myId].score.easy +
-        trivia[myId].score.medium +
-        trivia[myId].score.hard
+      trivia[id].score.correct.easy +
+        trivia[id].score.correct.medium +
+        trivia[id].score.correct.hard
     );
-    setWrongScore(TOTAL_QUESTIONS - correctScore);
+    setWrongScore(
+      trivia[id].score.wrong.easy +
+        trivia[id].score.wrong.medium +
+        trivia[id].score.wrong.hard
+    );
 
     setScores({
       easy: {
-        correct: trivia[myId].score.easy,
-        wrong: TOTAL_QUESTIONS - trivia[myId].score.easy,
+        correct: trivia[id].score.correct.easy,
+        wrong: trivia[id].score.wrong.easy,
       },
       medium: {
-        correct: trivia[myId].score.medium,
-        wrong: TOTAL_QUESTIONS - trivia[myId].score.medium,
+        correct: trivia[id].score.correct.medium,
+        wrong: trivia[id].score.wrong.medium,
       },
       hard: {
-        correct: trivia[myId].score.hard,
-        wrong: TOTAL_QUESTIONS - trivia[myId].score.hard,
+        correct: trivia[id].score.correct.hard,
+        wrong: trivia[id].score.wrong.hard,
       },
     });
-  }, [correctScore, myId, trivia]);
+  }, [id, trivia]);
 
   return (
     <Container>
@@ -87,18 +87,26 @@ export default function Result({ match }) {
           <QuestionsDetails>
             <QuestionDetail>
               <DifficultyDetails>Fácil</DifficultyDetails>
-              <span>Acertos: 2</span>
-              <span>Erros: 3</span>
+              <span>
+                Acertos: {scores && scores.easy && scores.easy.correct}
+              </span>
+              <span>Erros: {scores && scores.easy && scores.easy.wrong}</span>
             </QuestionDetail>
             <QuestionDetail>
               <DifficultyDetails>Médio</DifficultyDetails>
-              <span>Acertos: 2</span>
-              <span>Erros: 1</span>
+              <span>
+                Acertos: {scores && scores.medium && scores.medium.correct}
+              </span>
+              <span>
+                Erros: {scores && scores.medium && scores.medium.wrong}
+              </span>
             </QuestionDetail>
             <QuestionDetail>
               <DifficultyDetails>Difícil</DifficultyDetails>
-              <span>Acertos: 2</span>
-              <span>Erros: 1</span>
+              <span>
+                Acertos: {scores && scores.hard && scores.hard.correct}
+              </span>
+              <span>Erros: {scores && scores.hard && scores.hard.wrong}</span>
             </QuestionDetail>
           </QuestionsDetails>
           <Link to="/">

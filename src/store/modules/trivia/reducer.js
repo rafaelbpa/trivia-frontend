@@ -14,9 +14,16 @@ export default function trivia(state = INITIAL_STATE, action) {
             en: 'medium',
           },
           score: {
-            easy: 0,
-            medium: 0,
-            hard: 0,
+            correct: {
+              easy: 0,
+              medium: 0,
+              hard: 0,
+            },
+            wrong: {
+              easy: 0,
+              medium: 0,
+              hard: 0,
+            },
           },
           guessStreak: {
             correct: 0,
