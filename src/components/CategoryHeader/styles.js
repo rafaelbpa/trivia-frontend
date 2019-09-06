@@ -13,6 +13,10 @@ export const Container = styled.div`
     line-height: 32px;
     color: #1e2124;
     margin: 10px 0;
+
+    @media (max-width: 375px) {
+      margin: 10px;
+    }
   }
 
   a {
