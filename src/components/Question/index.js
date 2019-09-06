@@ -6,7 +6,7 @@ import { Container } from './styles';
 export default function Question({ isSelected, question }) {
   return (
     <Container isSelected={isSelected}>
-      <span>{question}</span>
+      <span dangerouslySetInnerHTML={{ __html: question }} />
     </Container>
   );
 }

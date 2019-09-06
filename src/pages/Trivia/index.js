@@ -66,7 +66,7 @@ export default function Trivia({ match }) {
 
       setQuestions(shuffle(data));
       setCorrectAnswer(response.data.results[0].correct_answer);
-      setQuestionTitle(response.data.results[0].question);
+      setQuestionTitle(unescape(response.data.results[0].question));
       setCategory(response.data.results[0].category);
     }
 
@@ -206,7 +206,7 @@ export default function Trivia({ match }) {
                 <span>{trivia[id].difficulty.pt}</span>
               </Difficulty>
             </Info>
-            <QuestionText>{questionTitle}</QuestionText>
+            <QuestionText dangerouslySetInnerHTML={{ __html: questionTitle }} />
 
             {questions.map(question => (
               <button
