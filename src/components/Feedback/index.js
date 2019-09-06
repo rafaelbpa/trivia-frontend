@@ -7,7 +7,7 @@ import arrowRight from '~/assets/arrow-right.png';
 
 export default function Feedback({ isCorrect, goForward }) {
   return (
-    <Wrapper>
+    <Wrapper data-testid="feedback">
       <Container isCorrect={isCorrect}>
         <Icon isCorrect={isCorrect} />
         <Result>Você {isCorrect ? 'acertou' : 'errou'}!</Result>
