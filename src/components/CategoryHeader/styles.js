@@ -15,7 +15,7 @@ export const Container = styled.div`
     margin: 10px 0;
   }
 
-  button {
+  a {
     display: flex;
     flex-direction: row;
     align-items: center;

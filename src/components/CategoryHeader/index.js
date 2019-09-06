@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 import { Container } from './styles';
 
@@ -9,10 +10,10 @@ export default function CategoryHeader({ category }) {
   return (
     <Container>
       <span>{category}</span>
-      <button type="button">
+      <Link to="/">
         <img src={closeIcon} alt="Fechar" />
         <span>Fechar</span>
-      </button>
+      </Link>
     </Container>
   );
 }
